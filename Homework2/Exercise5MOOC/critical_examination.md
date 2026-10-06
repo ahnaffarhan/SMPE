@@ -10,3 +10,6 @@ The main problem is the filtering step:
 
 ```python
 data = data[data.Malfunction > 0]
+```
+The analysis then states that flights without incidents do not provide information about the influence of temperature or pressure. This assumption is incorrect. A flight with zero malfunction is still an observation and provides important information about the probability of failure under those temperature and pressure conditions.
+By removing all the zero-malfunction flights, the analysis only considers flights where at least one failure has already occurred. This introduces a selection bias. In particular, many of the flights at higher temperatures had no malfunction, and removing them hides an important part of the relationship between temperature and failure. As a result, the original logistic regression finds almost no effect of temperature. The estimated temperature coefficient is approximately 0.0014, with a p-value of 0.991.
